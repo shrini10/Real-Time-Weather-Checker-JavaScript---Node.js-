@@ -1,0 +1,21 @@
+const axios = require('axios');
+
+const API_KEY = "YOUR_OPENWEATHERMAP_API_KEY"; 
+const city = "New York"; // Change city here
+
+async function getWeather() {
+    try {
+        const response = await axios.get(
+            `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${API_KEY}&units=metric`
+        );
+
+        console.log(`🌤️ Weather in ${city}:`);
+        console.log(`Temperature: ${response.data.main.temp}°C`);
+        console.log(`Humidity: ${response.data.main.humidity}%`);
+        console.log(`Condition: ${response.data.weather[0].description}`);
+    } catch (error) {
+        console.error("Error fetching weather data:", error.message);
+    }
+}
+
+getWeather();
